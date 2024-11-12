@@ -1,12 +1,13 @@
 package com.example.mobilenews.di.module
 
+import com.example.mobilenews.data.network.NewsApiClient
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import jakarta.inject.Singleton
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Singleton
 
 
 @Module
@@ -24,9 +25,16 @@ object NetworkModule {
     @Provides
     fun provideRetrofit(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("http://hn.algolia.com/api/v1/search_by_date?")
+            .baseUrl("https://hn.algolia.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-
     }
+
+    // Provides news api client
+    @Singleton
+    @Provides
+    fun provideNewsApiClient(retrofit: Retrofit): NewsApiClient {
+        return retrofit.create(NewsApiClient::class.java)
+    }
+
 }
