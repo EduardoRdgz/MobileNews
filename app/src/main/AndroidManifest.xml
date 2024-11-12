@@ -16,7 +16,7 @@
             android:name=".ui.Home.HomeActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/MobileNews">
+            android:theme="@style/MobileNews.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
