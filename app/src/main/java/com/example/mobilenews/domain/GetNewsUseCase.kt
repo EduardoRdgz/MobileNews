@@ -1,4 +1,7 @@
 package com.example.mobilenews.domain
 
-class GetNewsUseCase  {
+import javax.inject.Inject
+
+class GetNewsUseCase  @Inject constructor() {
+
 }

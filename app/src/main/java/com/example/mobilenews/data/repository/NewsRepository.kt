@@ -1,4 +1,7 @@
 package com.example.mobilenews.data.repository
 
-class NewsRepository {
+import javax.inject.Inject
+
+class NewsRepository @Inject constructor(){
+    //private val newsList: MutableList<News> = mutableListOf()
 }

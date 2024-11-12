@@ -1,4 +1,14 @@
 package com.example.mobilenews.ui.viewmodel
 
-class HomeViewModel {
+import androidx.lifecycle.ViewModel
+import com.example.mobilenews.domain.GetNewsUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
+
+@HiltViewModel
+class HomeViewModel @Inject constructor(
+    private val newsUseCase: GetNewsUseCase
+) : ViewModel() {
+
+
 }

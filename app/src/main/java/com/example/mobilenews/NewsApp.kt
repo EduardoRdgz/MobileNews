@@ -3,8 +3,9 @@ package com.example.mobilenews
 import android.app.Application
 import android.content.Context
 import android.os.Bundle
+import dagger.hilt.android.HiltAndroidApp
 
-
+@HiltAndroidApp
 class NewsApp : Application(){
 
 

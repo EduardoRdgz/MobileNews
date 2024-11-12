@@ -1,4 +1,7 @@
 package com.example.mobilenews.data.model
 
-class NewsProvider {
+import javax.inject.Inject
+
+class NewsProvider @Inject constructor( ){
+
 }

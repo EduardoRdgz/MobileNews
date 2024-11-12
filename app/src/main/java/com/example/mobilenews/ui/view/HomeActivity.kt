@@ -6,7 +6,9 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.mobilenews.databinding.ActivityMainBinding
 import com.example.mobilenews.R
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeActivity: AppCompatActivity() {
 
     private lateinit var binding:   ActivityMainBinding
