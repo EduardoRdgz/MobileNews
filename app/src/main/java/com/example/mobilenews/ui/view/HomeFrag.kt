@@ -1,4 +1,4 @@
-package com.example.mobilenews.ui.Home
+package com.example.mobilenews.ui.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
