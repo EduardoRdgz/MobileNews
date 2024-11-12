@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">MobileNews</string>
     <string name="tb_title_main_activity">Hacker News</string>
+    <string name="txt_title_author">By:</string>
 </resources>
