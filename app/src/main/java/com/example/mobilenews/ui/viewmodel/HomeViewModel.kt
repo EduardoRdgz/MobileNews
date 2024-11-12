@@ -4,7 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mobilenews.data.model.Hit
-import com.example.mobilenews.data.model.NewsModel
 import com.example.mobilenews.domain.GetNewsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -17,13 +16,11 @@ class HomeViewModel @Inject constructor(
 
     val newsModel = MutableLiveData<List<Hit>>()
 
+    //This function is called on creation of the viewmodel
     fun onCreate() {
         viewModelScope.launch {
             val result = newsUseCase()
-            if (!result.isNullOrEmpty()) {
-                newsModel.postValue(result!!)
-            }
+            if (!result.isNullOrEmpty()) newsModel.postValue(result!!)
         }
     }
-
 }
