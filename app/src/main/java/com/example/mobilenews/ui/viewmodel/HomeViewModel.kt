@@ -17,7 +17,7 @@ class HomeViewModel @Inject constructor(
     val newsModel = MutableLiveData<List<Hit>>()
 
     //This function is called on creation of the viewmodel
-    fun onCreate() {
+    fun getNews() {
         viewModelScope.launch {
             val result = newsUseCase()
             if (!result.isNullOrEmpty()) newsModel.postValue(result!!)

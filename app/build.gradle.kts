@@ -36,6 +36,7 @@ android {
         jvmTarget = "11"
     }
     buildFeatures {
+        dataBinding = true
         viewBinding = true
     }
 }
@@ -58,6 +59,7 @@ dependencies {
 
     // Hilt
     implementation(libs.android.dagger)
+    implementation(libs.androidx.swiperefreshlayout)
     ksp(libs.android.dagger.hilt.compiler)
 
     implementation(libs.androidx.core.ktx)

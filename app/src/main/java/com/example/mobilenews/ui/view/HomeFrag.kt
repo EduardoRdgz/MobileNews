@@ -22,13 +22,21 @@ class HomeFrag: Fragment() {
     private val viewModel: HomeViewModel by viewModels()
     private lateinit var adapter: HomeAdapter
 
+    // Handler for the swipe refresh
+    private val handler = object : NewsRefreshHandler {
+        override fun onRefresh() {
+            viewModel.getNews()
+        }
+    }
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
-        viewModel.onCreate()
+        viewModel.getNews()
         setup()
         return binding.root
     }
@@ -40,6 +48,7 @@ class HomeFrag: Fragment() {
 
     private fun setupObservers() {
         viewModel.newsModel.observe(viewLifecycleOwner) { news ->
+            binding.swipeRefresh.isRefreshing = false
             adapter.submitList(news)
             Log.d("TAG", "API list: $news")
         }
@@ -57,7 +66,13 @@ class HomeFrag: Fragment() {
             )
         }
 
+        binding.handler = handler
     }
 
-
+    /**
+     * Interface to handle the swipe refresh
+     */
+    interface NewsRefreshHandler{
+        fun onRefresh()
+    }
 }
