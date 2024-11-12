@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobilenews.data.model.Hit
 import com.example.mobilenews.databinding.ItemNewsBinding
+import com.example.mobilenews.utils.TimeUtils
 
 class HomeAdapter : ListAdapter<Hit, HomeAdapter.HomeViewHolder>(DiffCallback) {
 
@@ -33,7 +34,7 @@ class HomeAdapter : ListAdapter<Hit, HomeAdapter.HomeViewHolder>(DiffCallback) {
         fun bind(request: Hit) {
             binding.tvTitle.text = request.story_title
             binding.tvAuthor.text = request.author
-            binding.tvCreated.text = request.created_at
+            binding.tvCreated.text = TimeUtils.formatTime(request.created_at)
         }
     }
 
