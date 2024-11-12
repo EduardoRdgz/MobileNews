@@ -4,9 +4,12 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import com.example.mobilenews.R
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mobilenews.databinding.FragmentHomeBinding
 import com.example.mobilenews.ui.viewmodel.HomeViewModel
@@ -46,6 +49,15 @@ class HomeFrag: Fragment() {
         adapter = HomeAdapter()
         binding.rvNewsList.layoutManager = LinearLayoutManager(requireContext())
         binding.rvNewsList.adapter = adapter
+
+        adapter.onItemClick = { news ->
+            findNavController().navigate(
+                R.id.action_fragment_home_to_fragment_detail_item,
+                bundleOf("url" to news.story_url)
+            )
+        }
+
     }
+
 
 }

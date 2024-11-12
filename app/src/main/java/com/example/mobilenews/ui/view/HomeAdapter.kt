@@ -10,6 +10,8 @@ import com.example.mobilenews.databinding.ItemNewsBinding
 
 class HomeAdapter : ListAdapter<Hit, HomeAdapter.HomeViewHolder>(DiffCallback) {
 
+    var onItemClick: ((Hit) -> Unit)? = null
+
     // Create a new ViewHolder
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
         val binding = ItemNewsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -20,6 +22,10 @@ class HomeAdapter : ListAdapter<Hit, HomeAdapter.HomeViewHolder>(DiffCallback) {
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
         val request = getItem(position)
         holder.bind(request)
+        holder.itemView.setOnClickListener {
+            onItemClick?.invoke(request)
+        }
+
     }
 
     // ViewHolder class
@@ -40,5 +46,8 @@ class HomeAdapter : ListAdapter<Hit, HomeAdapter.HomeViewHolder>(DiffCallback) {
             return oldItem == newItem
         }
     }
+
+
+
 
 }
