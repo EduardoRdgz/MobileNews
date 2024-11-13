@@ -3,6 +3,7 @@ package com.example.mobilenews.data.model
 data class NewsModel(val hits: List<Hit>)
 
 data class Hit(
+    val objectID: String,
     val title: String,
     val url: String,
     val author: String,

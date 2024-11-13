@@ -55,12 +55,22 @@ dependencies {
     implementation(libs.com.squareup.retrofit2.converter.gson)
     implementation(libs.retrofit)
     implementation(libs.retrofit2.kotlin.coroutines.adapter)
+
+    // OkHttp Library
     implementation(libs.okhttp)
 
-    // Hilt
+    // Hilt Dagger Library
     implementation(libs.android.dagger)
-    implementation(libs.androidx.swiperefreshlayout)
     ksp(libs.android.dagger.hilt.compiler)
+
+    // SwipeRefreshLayout Library
+    implementation(libs.androidx.swiperefreshlayout)
+
+    // Room Library
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.room)
+    ksp(libs.androidx.room.compiler)
+
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

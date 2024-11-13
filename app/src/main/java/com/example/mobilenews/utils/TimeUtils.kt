@@ -2,7 +2,6 @@ package com.example.mobilenews.utils
 
 import java.text.SimpleDateFormat
 import java.util.Locale
-import kotlin.text.format
 
 object TimeUtils {
 

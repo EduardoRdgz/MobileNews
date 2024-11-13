@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mobilenews.data.model.Hit
 import com.example.mobilenews.databinding.FragmentHomeBinding
+import com.example.mobilenews.domain.model.New
 import com.example.mobilenews.ui.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -22,7 +23,7 @@ class HomeFrag: Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private val viewModel: HomeViewModel by viewModels()
     private lateinit var adapter: HomeAdapter
-    private var newsList = mutableListOf<Hit>()
+    private var newsList = mutableListOf<New>()
 
     // Handler for the swipe refresh
     private val handler = object : NewsRefreshHandler {
