@@ -42,7 +42,7 @@ class HomeAdapter : ListAdapter<New, HomeAdapter.HomeViewHolder>(DiffCallback) {
     // DiffUtil class
     object DiffCallback: DiffUtil.ItemCallback<New>(){
         override fun areItemsTheSame(oldItem: New, newItem: New): Boolean {
-            return oldItem.title == newItem.title
+            return oldItem.objectID == newItem.objectID
         }
         override fun areContentsTheSame(oldItem: New, newItem: New): Boolean {
             return oldItem == newItem
