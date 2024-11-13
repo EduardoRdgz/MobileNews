@@ -1,25 +1,27 @@
 package com.example.mobilenews.domain
 
 import com.example.mobilenews.data.db.entity.toDatabase
+import com.example.mobilenews.data.repository.NetworkStatusRepository
 import com.example.mobilenews.data.repository.NewsRepository
 import com.example.mobilenews.domain.model.New
 import javax.inject.Inject
 
 class GetNewsUseCase  @Inject constructor(
-    private val repository: NewsRepository
+    private val repository: NewsRepository,
+    private val networkStatusRepository: NetworkStatusRepository
 ) {
     //This invoke function is called when the class is called
     suspend operator fun invoke(): List<New> {
-
-        val news = repository.getNewsFromApi()
-
-        // If the news list is not empty, clear the database and insert the new news
-        // Else, get the news from the database
-        return if(news.isNotEmpty()) {
+        // If there is no internet connection, get the news from the database
+        if (!networkStatusRepository.isNetworkAvailable()) {
+            return repository.getNewsFromDatabase()
+        } else {
+            // If there is internet connection, get the news from the api
             repository.clearNews()
+            val news = repository.getNewsFromApi()
             repository.insertNews(news.map { it.toDatabase() })
-            news
-        } else repository.getNewsFromDatabase()
+            return news
+        }
     }
 
 }

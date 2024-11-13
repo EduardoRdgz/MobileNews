@@ -1,5 +1,7 @@
 package com.example.mobilenews.di.module
 
+import android.app.Application
+import android.content.Context
 import com.example.mobilenews.data.network.NewsApiClient
 import dagger.Module
 import dagger.Provides

@@ -8,7 +8,6 @@ import android.view.View
 import com.example.mobilenews.R
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.compose.ui.graphics.Color
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -20,7 +19,6 @@ import com.example.mobilenews.databinding.FragmentHomeBinding
 import com.example.mobilenews.domain.model.New
 import com.example.mobilenews.ui.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlin.div
 
 @AndroidEntryPoint
 class HomeFrag: Fragment() {
@@ -44,7 +42,7 @@ class HomeFrag: Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
-        viewModel.getNews()
+        //viewModel.getNews()
         setup()
         return binding.root
     }
@@ -52,9 +50,11 @@ class HomeFrag: Fragment() {
     private fun setup() {
         setupRecyclerView()
         setupObservers()
+        setupSwipeToDelete()
     }
 
     private fun setupObservers() {
+        // Observe the news list
         viewModel.newsModel.observe(viewLifecycleOwner) { news ->
             newsList = news.toMutableList()
             binding.swipeRefresh.isRefreshing = false
@@ -64,10 +64,12 @@ class HomeFrag: Fragment() {
     }
 
     private fun setupRecyclerView() {
+        // Set the recycler view
         adapter = HomeAdapter()
         binding.rvNewsList.layoutManager = LinearLayoutManager(requireContext())
         binding.rvNewsList.adapter = adapter
 
+        // Set the handler for the item click
         adapter.onItemClick = { news ->
             findNavController().navigate(
                 R.id.action_fragment_home_to_fragment_detail_item,
@@ -78,28 +80,22 @@ class HomeFrag: Fragment() {
         // Set the handler for the swipe refresh
         binding.handler = handler
 
+    }
 
+    private fun setupSwipeToDelete(){
+        // Setting swipe to delete item
         ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
             override fun onMove(
                 recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder,
                 target: RecyclerView.ViewHolder
             ): Boolean {
-                // this method is called
-                // when the item is moved.
                 return false
             }
 
-            override fun onChildDraw(
-                c: android.graphics.Canvas,
-                recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder,
-                dX: Float,
-                dY: Float,
-                actionState: Int,
-                isCurrentlyActive: Boolean
-            ) {
+            override fun onChildDraw(c: android.graphics.Canvas, recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, dX: Float, dY: Float, actionState: Int, isCurrentlyActive: Boolean) {
 
+                // Handle de swipe to delete attributes
                 if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
                     val itemView = viewHolder.itemView
 
@@ -124,42 +120,26 @@ class HomeFrag: Fragment() {
                     }
                 }
 
-                super.onChildDraw(
-                    c,
-                    recyclerView,
-                    viewHolder,
-                    dX,
-                    dY,
-                    actionState,
-                    isCurrentlyActive
-                )
+                super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                // this method is called when we swipe our item to right direction.
-                // on below line we are getting the item at a particular position.
                 val deletedCourse: New = newsList.get(viewHolder.adapterPosition)
 
-                // below line is to get the position
-                // of the item at that position.
+                // Get the position of the item at that position.
                 val position = viewHolder.adapterPosition
 
                 // this method is called when item is swiped.
                 // below line is to remove item from our array list.
                 newsList.removeAt(viewHolder.adapterPosition)
 
-                // below line is to notify our item is removed from adapter.
+                // Notify our item is removed from adapter.
                 adapter.notifyItemRemoved(viewHolder.adapterPosition)
 
-                // below line is to display our snackbar with action.
-                // below line is to display our snackbar with action.
-                // below line is to display our snackbar with action.
-                Toast.makeText(context, "Deleted " + deletedCourse.objectID, Toast.LENGTH_LONG).show()
+                // Display our toast
+                Toast.makeText(context, "Deleted " + deletedCourse.author +  " post", Toast.LENGTH_LONG).show()
             }
-            // at last we are adding this
-            // to our recycler view.
         }).attachToRecyclerView(binding.rvNewsList)
-
     }
 
     /**

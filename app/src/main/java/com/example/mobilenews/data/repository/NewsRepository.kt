@@ -2,7 +2,6 @@ package com.example.mobilenews.data.repository
 
 import com.example.mobilenews.data.db.dao.NewsDao
 import com.example.mobilenews.data.db.entity.NewsEntity
-import com.example.mobilenews.data.model.Hit
 import com.example.mobilenews.data.model.NewsProvider
 import com.example.mobilenews.data.network.NewsService
 import com.example.mobilenews.domain.model.New
@@ -16,8 +15,8 @@ class NewsRepository @Inject constructor(
 ){
 
     suspend fun getNewsFromApi(): List<New> {
-      val response : List<Hit> = api.getLatestNews()
-        return response.map { it.toNew()}
+      val response = api.getLatestNews()
+        return response.map { it.toNew() }
     }
 
     suspend fun getNewsFromDatabase(): List<New> {
