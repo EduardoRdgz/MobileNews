@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">MobileNews</string>
+    <string name="tb_title_main_activity">Hacker News</string>
+    <string name="title_detail_frag">Post</string>
+    <string name="txt_title_author">by:</string>
+    <string name="txt_title_created">at:</string>
 </resources>

@@ -1,7 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt)
 }
 
 android {
@@ -35,11 +36,41 @@ android {
         jvmTarget = "11"
     }
     buildFeatures {
-        compose = true
+        dataBinding = true
+        viewBinding = true
     }
 }
 
 dependencies {
+
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
+    implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
+
+    // Retrofit Library
+    implementation(libs.com.squareup.retrofit2.converter.gson)
+    implementation(libs.retrofit)
+    implementation(libs.retrofit2.kotlin.coroutines.adapter)
+
+    // OkHttp Library
+    implementation(libs.okhttp)
+
+    // Hilt Dagger Library
+    implementation(libs.android.dagger)
+    ksp(libs.android.dagger.hilt.compiler)
+
+    // SwipeRefreshLayout Library
+    implementation(libs.androidx.swiperefreshlayout)
+
+    // Room Library
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.room)
+    ksp(libs.androidx.room.compiler)
+
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

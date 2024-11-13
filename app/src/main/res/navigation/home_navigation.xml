@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_navigation"
+    app:startDestination="@id/fragment_home">
+
+    <fragment
+        android:id="@+id/fragment_home"
+        android:name="com.example.mobilenews.ui.view.HomeFrag"
+        android:label="@string/tb_title_main_activity"
+        tools:layout="@layout/fragment_home">
+
+        <action
+            android:id="@+id/action_fragment_home_to_fragment_detail_item"
+            app:destination="@id/fragment_detail_item" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_detail_item"
+        android:name="com.example.mobilenews.ui.view.DetailFrag"
+        android:label="@string/title_detail_frag"
+        tools:layout="@layout/fragment_detail_item">
+
+        <argument
+            android:name="url"
+            app:argType="string"
+            android:defaultValue="https://www.google.com" />
+
+    </fragment>
+
+</navigation>
