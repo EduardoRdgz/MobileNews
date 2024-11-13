@@ -2,7 +2,6 @@ package com.example.mobilenews.domain.model
 
 import com.example.mobilenews.data.db.entity.NewsEntity
 import com.example.mobilenews.data.model.Hit
-import com.example.mobilenews.data.model.NewsModel
 
 data class New(
                val objectID: String?,

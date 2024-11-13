@@ -32,4 +32,8 @@ class NewsRepository @Inject constructor(
         newsDao.clearNews()
     }
 
+    suspend fun deleteNew(id: Int){
+        newsDao.deleteNew(id)
+    }
+
 }

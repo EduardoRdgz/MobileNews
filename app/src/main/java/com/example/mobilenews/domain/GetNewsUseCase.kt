@@ -10,6 +10,9 @@ class GetNewsUseCase  @Inject constructor(
     private val repository: NewsRepository,
     private val networkStatusRepository: NetworkStatusRepository
 ) {
+
+
+
     //This invoke function is called when the class is called
     suspend operator fun invoke(): List<New> {
         // If there is no internet connection, get the news from the database
@@ -22,6 +25,11 @@ class GetNewsUseCase  @Inject constructor(
             repository.insertNews(news.map { it.toDatabase() })
             return news
         }
+    }
+
+    suspend fun deleteNew(id: Int){
+        repository.deleteNew(id)
+
     }
 
 }

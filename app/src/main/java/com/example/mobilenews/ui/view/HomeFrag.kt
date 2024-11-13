@@ -42,7 +42,7 @@ class HomeFrag: Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
-        //viewModel.getNews()
+        viewModel.getNews()
         setup()
         return binding.root
     }
@@ -133,11 +133,14 @@ class HomeFrag: Fragment() {
                 // below line is to remove item from our array list.
                 newsList.removeAt(viewHolder.adapterPosition)
 
+                //Delete item from database
+                viewModel.deleteNew(deletedCourse.objectID!!.toInt())
+
                 // Notify our item is removed from adapter.
                 adapter.notifyItemRemoved(viewHolder.adapterPosition)
 
                 // Display our toast
-                Toast.makeText(context, "Deleted " + deletedCourse.author +  " post", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, "Deleted " + deletedCourse.author +  " post", Toast.LENGTH_SHORT).show()
             }
         }).attachToRecyclerView(binding.rvNewsList)
     }
